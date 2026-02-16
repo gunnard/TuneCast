@@ -20,6 +20,7 @@ Jellyfin decides how to play media for each client (direct play, direct stream, 
 5. **Records what happened** and feeds outcomes back into the confidence model
 
 The result: clients that *can* direct play *do* direct play. Clients that can't get clean, predictable transcodes. Your server does less unnecessary work.
+<img width="1101" height="683" alt="image" src="https://github.com/user-attachments/assets/8de1133b-02f8-4c00-a388-ef1271afd5d0" />
 
 ### What it does NOT do
 
