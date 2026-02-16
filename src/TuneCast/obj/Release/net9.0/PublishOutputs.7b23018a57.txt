@@ -1,5 +1,0 @@
-/tmp/jellypro-publish/JellyPro.dll
-/tmp/jellypro-publish/JellyPro.deps.json
-/tmp/jellypro-publish/JellyPro.pdb
-/tmp/jellypro-publish/LiteDB.dll
-/tmp/jellypro-publish/JellyPro.xml
