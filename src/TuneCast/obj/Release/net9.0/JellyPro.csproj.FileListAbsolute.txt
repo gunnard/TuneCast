@@ -1,0 +1,14 @@
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.csproj.AssemblyReference.cache
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.AssemblyInfoInputs.cache
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.AssemblyInfo.cs
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.csproj.CoreCompileInputs.cache
+/Volumes/media/gunnard/jellypro/src/JellyPro/bin/Release/net9.0/JellyPro.deps.json
+/Volumes/media/gunnard/jellypro/src/JellyPro/bin/Release/net9.0/JellyPro.dll
+/Volumes/media/gunnard/jellypro/src/JellyPro/bin/Release/net9.0/JellyPro.pdb
+/Volumes/media/gunnard/jellypro/src/JellyPro/bin/Release/net9.0/JellyPro.xml
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.dll
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/refint/JellyPro.dll
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.xml
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/JellyPro.pdb
+/Volumes/media/gunnard/jellypro/src/JellyPro/obj/Release/net9.0/ref/JellyPro.dll

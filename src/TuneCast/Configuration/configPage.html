@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TuneCast</title>
+</head>
+<body>
+    <div id="TuneCastConfigPage" data-role="page" class="page type-interior pluginConfigurationPage"
+         data-require="emby-input,emby-button,emby-select,emby-checkbox">
+        <div data-role="content">
+            <div class="content-primary">
+                <form id="TuneCastConfigForm">
+                    <div class="verticalSection">
+                        <h2 class="sectionTitle">TuneCast — Adaptive Playback Policy Engine</h2>
+                        <p class="fieldDescription">
+                            TuneCast observes playback sessions and intelligently biases Jellyfin toward optimal
+                            direct play decisions. In conservative mode (default), it only observes and logs telemetry.
+                        </p>
+                        <div style="margin-top:12px;">
+                            <a is="emby-linkbutton" class="raised button-submit emby-button"
+                               href="configurationpage?name=TuneCast%20Dashboard"
+                               style="display:inline-flex;align-items:center;gap:8px;padding:8px 20px;text-decoration:none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                <span>Open Dashboard</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
+                        <h3 class="sectionTitle">Core Settings</h3>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="chkConservativeMode" type="checkbox" is="emby-checkbox" />
+                                <span>Conservative Mode</span>
+                            </label>
+                            <div class="fieldDescription checkboxFieldDescription">
+                                When enabled, the plugin defers to Jellyfin defaults on any uncertain decision.
+                                Recommended until you have telemetry data to review.
+                            </div>
+                        </div>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="chkEnableDynamicProfiles" type="checkbox" is="emby-checkbox" />
+                                <span>Enable Dynamic Profiles</span>
+                            </label>
+                            <div class="fieldDescription checkboxFieldDescription">
+                                Allow the plugin to actively modify device profiles to influence playback decisions.
+                                Leave disabled for telemetry-only mode (Phase 1).
+                            </div>
+                        </div>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="chkEnableLearning" type="checkbox" is="emby-checkbox" />
+                                <span>Enable Learning</span>
+                            </label>
+                            <div class="fieldDescription checkboxFieldDescription">
+                                Allow the plugin to adjust client confidence scores based on playback outcomes.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
+                        <h3 class="sectionTitle">Bitrate &amp; Performance</h3>
+
+                        <div class="inputContainer">
+                            <label class="inputLabel inputLabelUnfocused" for="txtServerLoadBiasWeight">
+                                Server Load Bias Weight (0.0 - 1.0)
+                            </label>
+                            <input id="txtServerLoadBiasWeight" type="number" step="0.1" min="0" max="1"
+                                   is="emby-input" class="emby-input" />
+                            <div class="fieldDescription">
+                                How much server load should influence playback decisions.
+                                0.0 = ignore load, 1.0 = heavily weight load.
+                            </div>
+                        </div>
+
+                        <div class="inputContainer">
+                            <label class="inputLabel inputLabelUnfocused" for="txtGlobalMaxBitrate">
+                                Global Max Bitrate Override (Mbps, leave empty for no override)
+                            </label>
+                            <input id="txtGlobalMaxBitrate" type="number" step="1" min="1"
+                                   is="emby-input" class="emby-input" />
+                            <div class="fieldDescription">
+                                Optional global bitrate cap applied to all sessions.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="verticalSection">
+                        <h3 class="sectionTitle">Telemetry</h3>
+
+                        <div class="checkboxContainer checkboxContainer-withDescription">
+                            <label class="emby-checkbox-label">
+                                <input id="chkEnableVerboseLogging" type="checkbox" is="emby-checkbox" />
+                                <span>Enable Verbose Logging</span>
+                            </label>
+                            <div class="fieldDescription checkboxFieldDescription">
+                                Log detailed decision reasoning for every playback event.
+                            </div>
+                        </div>
+
+                        <div class="inputContainer">
+                            <label class="inputLabel inputLabelUnfocused" for="txtTelemetryRetentionDays">
+                                Telemetry Retention (days)
+                            </label>
+                            <input id="txtTelemetryRetentionDays" type="number" step="1" min="1" max="365"
+                                   is="emby-input" class="emby-input" />
+                            <div class="fieldDescription">
+                                Number of days to retain playback telemetry data.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var TuneCastConfig = {
+                pluginUniqueId: 'd4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f90'
+            };
+
+            document.querySelector('#TuneCastConfigPage')
+                .addEventListener('pageshow', function () {
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(TuneCastConfig.pluginUniqueId).then(function (config) {
+                        document.querySelector('#chkConservativeMode').checked = config.ConservativeMode;
+                        document.querySelector('#chkEnableDynamicProfiles').checked = config.EnableDynamicProfiles;
+                        document.querySelector('#chkEnableLearning').checked = config.EnableLearning;
+                        document.querySelector('#txtServerLoadBiasWeight').value = config.ServerLoadBiasWeight;
+                        document.querySelector('#txtGlobalMaxBitrate').value =
+                            config.GlobalMaxBitrateOverride ? (config.GlobalMaxBitrateOverride / 1000000) : '';
+                        document.querySelector('#chkEnableVerboseLogging').checked = config.EnableVerboseLogging;
+                        document.querySelector('#txtTelemetryRetentionDays').value = config.TelemetryRetentionDays;
+                        Dashboard.hideLoadingMsg();
+                    });
+                });
+
+            document.querySelector('#TuneCastConfigForm')
+                .addEventListener('submit', function (e) {
+                    Dashboard.showLoadingMsg();
+                    ApiClient.getPluginConfiguration(TuneCastConfig.pluginUniqueId).then(function (config) {
+                        config.ConservativeMode = document.querySelector('#chkConservativeMode').checked;
+                        config.EnableDynamicProfiles = document.querySelector('#chkEnableDynamicProfiles').checked;
+                        config.EnableLearning = document.querySelector('#chkEnableLearning').checked;
+                        config.ServerLoadBiasWeight =
+                            parseFloat(document.querySelector('#txtServerLoadBiasWeight').value) || 0.3;
+
+                        var bitrateVal = document.querySelector('#txtGlobalMaxBitrate').value;
+                        config.GlobalMaxBitrateOverride = bitrateVal ? (parseInt(bitrateVal) * 1000000) : null;
+
+                        config.EnableVerboseLogging = document.querySelector('#chkEnableVerboseLogging').checked;
+                        config.TelemetryRetentionDays =
+                            parseInt(document.querySelector('#txtTelemetryRetentionDays').value) || 90;
+
+                        ApiClient.updatePluginConfiguration(TuneCastConfig.pluginUniqueId, config).then(function () {
+                            Dashboard.processPluginConfigurationUpdateResult();
+                        });
+                    });
+                    e.preventDefault();
+                    return false;
+                });
+        </script>
+    </div>
+</body>
+</html>
