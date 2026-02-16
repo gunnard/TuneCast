@@ -1,0 +1,12 @@
+[
+  {
+    "guid": "d4e5f6a7-b8c9-0d1e-2f3a-4b5c6d7e8f90",
+    "name": "TuneCast",
+    "description": "Adaptive playback intelligence plugin for Jellyfin. Learns your clients, shapes device profiles, and steers playback toward direct play — reducing unnecessary transcoding without breaking anything.",
+    "overview": "Adaptive playback intelligence — learns clients, shapes profiles, maximizes direct play.",
+    "owner": "gunnard",
+    "category": "General",
+    "imageUrl": "",
+    "versions": []
+  }
+]

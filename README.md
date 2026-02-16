@@ -30,26 +30,24 @@ The result: clients that *can* direct play *do* direct play. Clients that can't 
 
 ---
 
-## Quick Start
+## Install
 
-### Requirements
+### Option 1: Plugin Repository (recommended)
 
-- **Jellyfin Server 10.11.x+**
-- **.NET SDK 9.0** (build only — not needed at runtime)
+Add the TuneCast repository to Jellyfin — the plugin will appear in your catalog for one-click install and automatic updates.
 
-### Build
+1. Go to **Admin Dashboard → Plugins → Repositories**
+2. Click **Add** and paste this URL:
+   ```
+   https://raw.githubusercontent.com/gunnard/TuneCast/main/manifest.json
+   ```
+3. Go to **Catalog → General → TuneCast → Install**
+4. **Restart Jellyfin**
 
-```bash
-git clone https://github.com/gunnard/TuneCast.git
-cd TuneCast
-dotnet build src/TuneCast/TuneCast.csproj -c Release
-```
+### Option 2: Manual Install
 
-Output: `src/TuneCast/bin/Release/net9.0/TuneCast.dll`
-
-### Install
-
-1. Create a plugin folder on your Jellyfin server:
+1. Download `TuneCast.zip` from the [latest release](https://github.com/gunnard/TuneCast/releases/latest)
+2. Extract into your Jellyfin plugins directory:
 
    | Platform | Path |
    |----------|------|
@@ -57,9 +55,19 @@ Output: `src/TuneCast/bin/Release/net9.0/TuneCast.dll`
    | **Docker** | `/config/data/plugins/TuneCast_1.0.0.0/` |
    | **Windows** | `%APPDATA%\jellyfin\data\plugins\TuneCast_1.0.0.0\` |
 
-2. Copy **`TuneCast.dll`** and **`LiteDB.dll`** into that folder
 3. **Restart Jellyfin**
-4. Go to **Admin Dashboard → Plugins → TuneCast** to configure
+
+### Option 3: Build from Source
+
+Requires **.NET SDK 9.0** and **Jellyfin Server 10.11.x+**.
+
+```bash
+git clone https://github.com/gunnard/TuneCast.git
+cd TuneCast
+dotnet build src/TuneCast/TuneCast.csproj -c Release
+```
+
+Output: `src/TuneCast/bin/Release/net9.0/TuneCast.dll` — copy it and `LiteDB.dll` into your plugins directory and restart Jellyfin.
 
 ### Run Tests
 
